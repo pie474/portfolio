@@ -37,7 +37,7 @@ export default function BalstdProjectPage() {
                     </p>
                     <div className="flex justify-center">
                         <VideoPlayer
-                            src="/gated_ramp.mp4"
+                            src="/projects/balstd/gated_ramp.mp4"
                             caption="Early 2D simulation on a flat surface, with the position setpoint being a saturating ramp function."
                         />
                     </div>
