@@ -30,7 +30,7 @@ export default function BalstdProjectPage() {
                         Dynamic models of the robot were built in Simulink using Simscape Multibody to capture the true nonlinear dynamics of the leg and wheel mechanisms.
                     </p>
 
-                    <br></br>
+                    <br />
 
                     <p className="text-gray-400">
                         An initial 2d model was first created to test as close to the LQR as possible.
