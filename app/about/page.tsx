@@ -6,17 +6,13 @@ export default function About() {
             <h1 className="text-3xl font-semibold mb-6">About Me</h1>
 
             <p className="text-gray-300 mb-4">
-                Hi! I'm <span className="text-white font-medium">Chinmay Murthy</span>, a software developer and robotics enthusiast with a passion for building intelligent systems that bridge the physical and digital worlds.
-                I enjoy working across the stack - from embedded firmware and control systems to web applications and simulation.
+                Hi! I'm <span className="text-white font-medium">Chinmay Murthy</span>, a Electrical and Computer Engineering student at the University of Washington. I'm also a software developer and robotics enthusiast with a passion for building intelligent systems that bridge the physical and digital worlds.
+                I enjoy working across the stack, from embedded firmware and control systems to web applications and simulation.
             </p>
 
             <p className="text-gray-300 mb-4">
                 Outside of engineering, I'm a committed musician. I play several instruments, including piano, alto saxophone, flute, french horn, and most recently the uillean bagpipes.
                 I also compose and arrange music for my various ensembles and have experience scoring for film and video games.
-            </p>
-
-            <p className="text-gray-300 mb-4">
-                I’m especially drawn to interdisciplinary projects that allow me to merge technical rigor with creative expression, whether it’s developing control algorithms for a robot or orchestrating a cinematic cue.
             </p>
 
             <div className="mt-8">
