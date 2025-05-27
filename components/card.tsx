@@ -4,12 +4,12 @@ import Link from 'next/link'
 type Props = {
     title: string
     description: string | ReactNode
-    keywords?: string[] // tech or tags
+    tags?: string[] // tech or tags
     link?: string
     date?: string
 }
 
-export default function Card({ title, description, keywords, link, date }: Props) {
+export default function Card({ title, description, tags, link, date }: Props) {
     const cardContent = (
         <div
             className={`bg-gray-800 p-4 rounded-xl shadow transition 
@@ -23,9 +23,9 @@ export default function Card({ title, description, keywords, link, date }: Props
 
             <p className="text-sm mt-2 text-gray-300">{description}</p>
 
-            {keywords && keywords.length > 0 && (
+            {tags && tags.length > 0 && (
                 <div className="mt-2 text-xs text-gray-400 flex flex-wrap gap-2">
-                    {keywords.map((word) => (
+                    {tags.map((word) => (
                         <span key={word} className="bg-gray-700 px-2 py-1 rounded">
                             {word}
                         </span>
