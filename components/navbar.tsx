@@ -23,7 +23,6 @@ export default function Navbar() {
     const pathname = usePathname()
     const currentTitle = routeTitles[pathname] || ''
 
-
     return (
         <nav className="bg-gray-950 text-gray-200 p-4 flex justify-between items-center relative">
             <div className="flex space-x-4">
