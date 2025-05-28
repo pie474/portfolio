@@ -14,7 +14,7 @@ export default function Music() {
                             <em>Violet Evergarden</em> and <em>Frieren: Beyond Journey&apos;s End</em>. Performed by Music for Charity at UW.
                         </>
                     }
-                    link="/music/frieren-medley"
+                    tags={['arrangement', 'orchestral', 'performed']}
                     date="May 2025"
                 />
                 <Card
@@ -25,8 +25,27 @@ export default function Music() {
                             <em>A Promised Neverland</em>. Performed by Music for Charity at UW.
                         </>
                     }
-                    link="/music/frieren-medley"
+                    tags={['arrangement', 'orchestral', 'performed']}
                     date="May 2025"
+                />
+                <Card
+                    title="Game/Music Jam 2024"
+                    description="Wrote progress-reactive gameplay music for a sysyphean game called Elysium Ascent."
+                    date="Nov 2024"
+                    tags={['composition', 'mockup']}
+                    link="https://jaheimftc.itch.io/elysium-ascent"
+                />
+                <Card
+                    title="Game/Music Jam 2023"
+                    description="Wrote title screen music for a medieval game called Legacy. My team won Best Music!"
+                    tags={['composition', 'mockup']}
+                    date="Nov 2023"
+                />
+                <Card
+                    title="Crystalline Ice Caves"
+                    description="Background music I composed for a hypothetical Celeste-inspired game stage, including variations for different sub-regions."
+                    tags={['composition', 'mockup']}
+                    date="May 2023"
                 />
             </div>
 
