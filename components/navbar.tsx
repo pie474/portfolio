@@ -10,14 +10,19 @@ const routeTitles: { [key: string]: string } = {
     '/about': 'About Me',
 }
 
+function Navlink({ path, currentPath }: { path: string, currentPath: string }) {
+    const linkClass =
+        path === currentPath
+            ? 'text-white font-semibold underline'
+            : 'text-gray-400 hover:text-white transition-colors duration-200'
+
+    return (<Link href={path} className={linkClass}>{routeTitles[path]}</Link>)
+}
+
 export default function Navbar() {
     const pathname = usePathname()
     const currentTitle = routeTitles[pathname] || ''
 
-    const linkClass = (path: string) =>
-        pathname === path
-            ? 'text-white font-semibold underline'
-            : 'text-gray-400 hover:text-white transition-colors duration-200'
 
     return (
         <nav className="bg-gray-950 text-gray-200 p-4 flex justify-between items-center relative">
@@ -32,9 +37,9 @@ export default function Navbar() {
             </div>
 
             <div className="flex space-x-4">
-                <Link href="/projects" className={linkClass('/projects')}>Projects</Link>
-                <Link href="/music" className={linkClass('/music')}>Music</Link>
-                <Link href="/about" className={linkClass('/about')}>About</Link>
+                <Navlink path="/projects" currentPath={pathname} />
+                <Navlink path="/music" currentPath={pathname} />
+                <Navlink path="/about" currentPath={pathname} />
             </div>
         </nav>
     )
