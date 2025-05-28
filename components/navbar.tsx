@@ -14,26 +14,27 @@ export default function Navbar() {
     const pathname = usePathname()
     const currentTitle = routeTitles[pathname] || ''
 
+    const linkClass = (path: string) =>
+        pathname === path
+            ? 'text-white font-semibold underline'
+            : 'text-gray-400 hover:text-white transition-colors duration-200'
+
     return (
         <nav className="bg-gray-950 text-gray-200 p-4 flex justify-between items-center relative">
-            {/* Left: site name or nav */}
             <div className="flex space-x-4">
                 <Link href="/" className="font-bold text-lg text-white">
                     Chinmay
                 </Link>
-                {/* Optional: side nav links here */}
             </div>
 
-            {/* Center: current page title */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 text-gray-400 font-medium">
+            <div className="absolute left-1/2 transform -translate-x-1/2 text-gray-400 font-medium hidden sm:block">
                 {currentTitle}
             </div>
 
-            {/* Right: nav links */}
             <div className="flex space-x-4">
-                <Link href="/projects">Projects</Link>
-                <Link href="/music">Music</Link>
-                <Link href="/about">About</Link>
+                <Link href="/projects" className={linkClass('/projects')}>Projects</Link>
+                <Link href="/music" className={linkClass('/music')}>Music</Link>
+                <Link href="/about" className={linkClass('/about')}>About</Link>
             </div>
         </nav>
     )
