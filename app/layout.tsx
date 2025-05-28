@@ -22,7 +22,7 @@ export default function RootLayout({
       >
         <div className="bg-gray-900 text-gray-100 min-h-screen flex flex-col">
           <Navbar />
-          <main className="flex-1 p-4">{children}</main>
+          <div className="flex-1 p-4">{children}</div>
           <Footer />
 
           <Analytics />

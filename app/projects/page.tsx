@@ -3,7 +3,6 @@ import Card from '../../components/card'
 export default function Projects() {
   return (
     <div>
-      <h1 className="text-3xl font-semibold mb-6">Projects</h1>
       <div className="grid md:grid-cols-2 gap-4">
         <Card
           title="Two Wheel-Legged Balancing Robot"

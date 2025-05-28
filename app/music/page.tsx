@@ -3,9 +3,9 @@ import Card from '../../components/card'
 export default function Music() {
     return (
         <div>
-            <h1 className="text-3xl font-semibold mb-6">Music</h1>
-            <div className="grid md:grid-cols-2 gap-4">
+            {/* <h1 className="text-3xl font-semibold mb-6">Projects</h1> */}
 
+            <div className="grid md:grid-cols-2 gap-4">
                 <Card
                     title="Frieren Medley"
                     description={

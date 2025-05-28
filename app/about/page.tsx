@@ -3,8 +3,6 @@ import { FaGithub, FaGitlab, FaLinkedin } from 'react-icons/fa'
 export default function About() {
     return (
         <div className="max-w-3xl mx-auto">
-            <h1 className="text-3xl font-semibold mb-6">About Me</h1>
-
             <p className="text-gray-300 mb-4">
                 Hi! I'm <span className="text-white font-medium">Chinmay Murthy</span>, a Electrical and Computer Engineering student at the University of Washington. I'm also a software developer and robotics enthusiast with a passion for building intelligent systems that bridge the physical and digital worlds.
                 I enjoy working across the stack, from embedded firmware and control systems to web applications and simulation.
