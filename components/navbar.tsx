@@ -16,7 +16,7 @@ function Navlink({ path, currentPath }: { path: string, currentPath: string }) {
             ? 'text-white font-semibold underline'
             : 'text-gray-400 hover:text-white transition-colors duration-200'
 
-    return (<Link href={path} className={linkClass}>{routeTitles[path]}</Link>)
+    return (<Link href={path} className={linkClass}>{routeTitles[path] || ''}</Link>)
 }
 
 export default function Navbar() {
