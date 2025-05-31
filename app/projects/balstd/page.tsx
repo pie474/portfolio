@@ -1,4 +1,4 @@
-import VideoPlayer from '../../../components/video_player'
+import VideoPlayer from '@/components/video_player'
 
 export default function BalstdProjectPage() {
     return (

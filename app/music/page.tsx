@@ -1,7 +1,6 @@
 'use client'
 
-import Card from '../../components/card'
-import AudioPlayer from '../../components/audio_player'
+import Card from '@/components/card'
 
 import dynamic from 'next/dynamic'
 const MiniAudioPlayer = dynamic(() => import('@/components/mini_audio_player'), {

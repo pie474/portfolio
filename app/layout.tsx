@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.css";
-import Navbar from '../components/navbar'
-import Footer from '../components/footer'
+import Navbar from '@/components/navbar'
+import Footer from '@/components/footer'
 
 export const metadata: Metadata = {
   title: "Chinmay's Portfolio",
