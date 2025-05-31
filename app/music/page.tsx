@@ -38,7 +38,7 @@ export default function Music() {
                 />
                 <Card
                     title="Game/Music Jam 2024"
-                    description="Wrote progress-reactive gameplay music for a sysyphean game called Elysium Ascent."
+                    description="Wrote progress-reactive gameplay music for a sisyphean game called Elysium Ascent."
                     date="Nov 2024"
                     tags={['composition', 'mockup']}
                     link="https://jaheimftc.itch.io/elysium-ascent"
