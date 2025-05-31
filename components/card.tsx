@@ -15,7 +15,7 @@ export default function Card({ title, description, tags, link, date, icon }: Pro
     const cardInner = (
         <div
             className={`bg-gray-800 p-4 rounded-xl shadow transition 
-            ${false ? 'hover:bg-gray-700 cursor-pointer' : ''}`}
+            ${false ? 'hover:scale-101 cursor-pointer' : ''}`}
         >
             <div className="flex items-start gap-4">
                 {icon && (
@@ -33,7 +33,10 @@ export default function Card({ title, description, tags, link, date, icon }: Pro
                 <div className="flex-1">
                     <div className="flex justify-between items-start">
                         {link ? (
-                            <Link href={link} className="text-xl font-bold text-white hover:underline inline-flex items-center gap-1 group">
+                            <Link
+                                href={link} className="text-xl font-bold text-white hover:underline inline-flex items-center gap-1 group"
+                                {...(link.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                            >
                                 <span>{title}</span>
                                 <FaLink className="text-sm text-gray-400 group-hover:text-white transition" />
                             </Link>
@@ -50,7 +53,6 @@ export default function Card({ title, description, tags, link, date, icon }: Pro
                 </div>
             </div>
 
-            {/* Full-width content below the icon */}
             <div className="mt-3">
                 <p className="text-sm text-gray-300">{description}</p>
 
