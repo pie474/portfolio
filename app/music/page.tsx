@@ -1,10 +1,16 @@
+'use client'
+
 import Card from '../../components/card'
+import AudioPlayer from '../../components/audio_player'
+
+import dynamic from 'next/dynamic'
+const MiniAudioPlayer = dynamic(() => import('@/components/mini_audio_player'), {
+    ssr: false
+})
 
 export default function Music() {
     return (
         <div>
-            {/* <h1 className="text-3xl font-semibold mb-6">Projects</h1> */}
-
             <div className="grid md:grid-cols-2 gap-4">
                 <Card
                     title="Frieren Medley"
@@ -16,6 +22,7 @@ export default function Music() {
                     }
                     tags={['arrangement', 'orchestral', 'performed']}
                     date="May 2025"
+                    link="https://youtu.be/A8sizwcSxDA?si=_YUWdEg9QilyTdRX&t=3458"
                 />
                 <Card
                     title="Isabella's Lullaby"
@@ -27,6 +34,7 @@ export default function Music() {
                     }
                     tags={['arrangement', 'orchestral', 'performed']}
                     date="May 2025"
+                    link="https://youtu.be/A8sizwcSxDA?si=3zH07jjWXVcNyZ9r&t=938"
                 />
                 <Card
                     title="Game/Music Jam 2024"
@@ -34,18 +42,21 @@ export default function Music() {
                     date="Nov 2024"
                     tags={['composition', 'mockup']}
                     link="https://jaheimftc.itch.io/elysium-ascent"
+                    icon={<MiniAudioPlayer src="music/single_demo.mp3" diameter={50} />}
                 />
                 <Card
                     title="Game/Music Jam 2023"
                     description="Wrote title screen music for a medieval game called Legacy. My team won Best Music!"
                     tags={['composition', 'mockup']}
                     date="Nov 2023"
+                    icon={<MiniAudioPlayer src="music/Title2xloop.mp3" diameter={50} />}
                 />
                 <Card
                     title="Crystalline Ice Caves"
                     description="Background music I composed for a hypothetical Celeste-inspired game stage, including variations for different sub-regions."
                     tags={['composition', 'mockup']}
                     date="May 2023"
+                    icon={<MiniAudioPlayer src="music/crystalline_ice_caves5.mp3" diameter={50} />}
                 />
             </div>
 
@@ -64,7 +75,6 @@ export default function Music() {
                     </a>!
                 </p>
             </div>
-
         </div>
     )
 }
