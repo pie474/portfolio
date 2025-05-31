@@ -2,16 +2,16 @@ import VideoPlayer from '@/components/video_player'
 
 export default function BalstdProjectPage() {
     return (
-        <div className="max-w-3xl mx-auto">
-            <h1 className="text-3xl font-semibold mb-4">Two Wheel-Legged Balancing Robot</h1>
+        <div className="max-w-3xl mx-auto pt-24">
+            <h1 className="text-3xl font-semibold mb-6">Two Wheel-Legged Balancing Robot</h1>
 
-            <p className="text-gray-300 mb-6">
+            <p className="text-gray-300 mb-8">
                 This project explores the control of a two-wheeled robot equipped with active suspension legs using modern control techniques. Inspired by systems like Boston Dynamics' Handle and traditional inverted pendulums, the robot combines balance, leg articulation, and real-time control into one platform.
             </p>
 
             <div className="space-y-4">
                 <section>
-                    <h2 className="text-xl font-semibold mb-2">Overview</h2>
+                    <h2 className="text-xl font-semibold mb-2">Goal</h2>
                     <p className="text-gray-400">
                         The robot is built on a custom two-wheeled drive base with 5-bar linkage suspension legs that can actively adjust for terrain or balance assistance. The control algorithm uses an LQR (Linear Quadratic Regulator) approach to maintain upright stability under disturbances.
                     </p>
@@ -20,7 +20,7 @@ export default function BalstdProjectPage() {
                 <section>
                     <h2 className="text-xl font-semibold mb-2">LQR Design</h2>
                     <p className="text-gray-400">
-                        The LQR assumes a simplified 2d model of the robot that includes a wheel, rigid leg, and single hip joint, with torques applyable at each joint.
+                        The LQR assumes a simplified 2d model of the robot that includes a wheel, rigid leg, and single hip joint, with torques applicable at each joint.
                     </p>
                 </section>
 
@@ -33,9 +33,10 @@ export default function BalstdProjectPage() {
                     <br />
 
                     <p className="text-gray-400">
-                        An initial 2d model was first created to test as close to the LQR as possible.
+                        An initial 2d model was first created to test as close to the LQR as possible. There was a lot of debugging that had to be done with sign conventions and such, which was much easier to do with this reduced dimensionality.
                     </p>
-                    <div className="flex justify-center">
+
+                    <div className="flex justify-center mb-4 mt-4">
                         <VideoPlayer
                             src="/projects/balstd/gated_ramp.mp4"
                             caption="Early 2D simulation on a flat surface, with the position setpoint being a saturating ramp function."
@@ -43,26 +44,29 @@ export default function BalstdProjectPage() {
                     </div>
 
                     <p className="text-gray-400">
-                        The LQR controller was first validated here, introducing various measurement imperfections that would be encountered in real life to prove stability.
+                        Next was the full 3d simulation. With the 2d variant working, this was a simple matter of adding a second leg, and adding a couple more PID controllers to control  the newly introduced DOFs, like roll (side-side tilt), leg split (keep the legs at the same angle from the chassis), and yaw (overall heading).
+                    </p>
+
+                    <div className="flex justify-center mb-4 mt-4">
+                        <VideoPlayer
+                            src="/projects/balstd/sim_3d.mp4"
+                            caption="3d version of the above simulation."
+                        />
+                    </div>
+
+                    <p className="text-gray-400">
+                        This seemed pretty foolproof in simulation. It performed phenomenally against offset center-of-mass, incorrect torque scaling, and various starting states.
+                        {/* However, it was still making other assumptions. Mainly, it was still a continuous-time controller (impossible with a microcontroller), and didn't model any sensor phase delays. */}
                     </p>
                 </section>
 
                 <section>
                     <h2 className="text-xl font-semibold mb-2">Deployment</h2>
                     <p className="text-gray-400">
-                        The validated controller was deployed to a STM32-based embedded platform. Motor encoders were used for proprioceptive feedback, and a 6-axis IMU on the chassis was used for world orientation.
+                        The controller was deployed to a STM32-based embedded platform. Motor encoders were used for proprioceptive feedback, and a 6-axis IMU on the chassis was used for world orientation. I'm currently in the process of solving the sim2real domain gap issue. Active progress is being made and I'll update this page accordingly, so check back if you're curious how I'm doing!
                     </p>
                 </section>
 
-                {/* <section>
-                    <h2 className="text-xl font-semibold mb-2">Technologies</h2>
-                    <ul className="list-disc list-inside text-gray-400">
-                        <li>STM32 (bare-metal C++)</li>
-                        <li>Simulink / Simscape Multibody</li>
-                        <li>Linear control theory (LQR)</li>
-                        <li>Real-time embedded development</li>
-                    </ul>
-                </section> */}
             </div>
         </div>
     )
