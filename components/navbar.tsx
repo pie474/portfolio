@@ -24,7 +24,7 @@ export default function Navbar() {
     const currentTitle = routeTitles[pathname] || ''
 
     return (
-        <nav className="bg-gray-950 text-gray-200 p-4 flex justify-between items-center relative">
+        <nav className="fixed top-0 w-full z-50 h-15 bg-gray-950 text-gray-200 p-4 flex justify-between items-center">
             <div className="flex space-x-4">
                 <Link href="/" className="font-bold text-lg text-white">
                     Chinmay
