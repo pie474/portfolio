@@ -23,7 +23,6 @@ export default function Projects() {
           title="Conductor"
           description="A CV pipeline that aims to sync MIDI music playback to video feed of a conductor, similar to how a human musician would play their instrument in an ensemble."
           tags={['Python', 'CV', 'WIP']}
-          link="/projects/balstd"
           date="Nov 2024"
         />
       </div>
