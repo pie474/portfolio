@@ -83,7 +83,6 @@ export default function Music() {
                     description="A arrangement of Yu-Peng Chen's track Fresh Breezes of Dawn from Genshin Impact. I retroactively made a score for this one which can be found on my Musescore page."
                     tags={['arrangement', 'orchestral', 'mockup']}
                     date="Jun 2022"
-                    icon={<MiniAudioPlayer src="music/poking_battle_3.mp3" diameter={50} />}
                     link="https://musescore.com/user/23432856/scores/21733810?share=copy_link"
                 />
                 <Card
