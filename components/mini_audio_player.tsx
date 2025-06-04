@@ -101,6 +101,7 @@ export default function MiniAudioPlayer({ src, diameter = 80, barWidth = 6 }: Mi
     }
 
     const handleSeekEnd = (e: React.MouseEvent<SVGSVGElement>) => {
+        if (!isSeeking) return
         const newTime = getTimeFromMouse(e)
         if (!newTime) return
 
@@ -133,10 +134,10 @@ export default function MiniAudioPlayer({ src, diameter = 80, barWidth = 6 }: Mi
                 width="100%"
                 height="100%"
                 viewBox={`0 0 ${diameter} ${diameter}`}
-                // onClick={handleSeekChange}
                 onMouseDown={handleSeekStart}
                 onMouseMove={handleSeekChange}
                 onMouseUp={handleSeekEnd}
+                onMouseLeave={handleSeekEnd}
                 className="absolute top-0 left-0"
             >
                 <circle
