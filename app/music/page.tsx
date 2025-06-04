@@ -10,7 +10,7 @@ const MiniAudioPlayer = dynamic(() => import('@/components/mini_audio_player'), 
 export default function Music() {
     return (
         <div>
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid md:grid-cols-3 gap-4">
                 <Card
                     title="Frieren Medley"
                     description={
