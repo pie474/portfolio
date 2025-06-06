@@ -14,6 +14,15 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         p: ({ children }) => (
             <p className="text-gray-300 mt-2">{children}</p>
         ),
+        a: ({ children, href }) => (
+            <a href={href}
+                className="text-blue-400 hover:underline mt-2"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                {children}
+            </a>
+        ),
         ...components,
     }
 }

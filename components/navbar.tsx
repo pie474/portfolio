@@ -7,6 +7,7 @@ const routeTitles: { [key: string]: string } = {
     '/': '',
     '/projects': 'Software',
     '/projects/balstd': 'Software - Balancing Robot',
+    '/projects/path-following': 'Software - Path Following',
     '/music': 'Music',
     '/about': 'About Me',
 }

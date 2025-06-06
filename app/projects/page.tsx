@@ -24,6 +24,13 @@ export default function Projects() {
           tags={['Python', 'CV', 'WIP']}
           date="Nov 2024"
         />
+        <Card
+          title="Robust Path Following"
+          description="A novel approach to the carrot-on-a-stick method for following a path with a holonomic chassis. Intelligently handles loops, as well as modifications to the path mid-execution."
+          tags={['STM32', 'C++']}
+          link="/projects/path-following"
+          date="May 2024"
+        />
       </div>
     </div>
   );
