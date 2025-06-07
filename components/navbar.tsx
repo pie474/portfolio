@@ -5,8 +5,8 @@ import { usePathname } from 'next/navigation'
 
 const routeTitles: { [key: string]: string } = {
     '/': '',
-    '/projects': 'Projects',
-    '/projects/balstd': 'Projects - Balancing Robot',
+    '/projects': 'Software',
+    '/projects/balstd': 'Software - Balancing Robot',
     '/music': 'Music',
     '/about': 'About Me',
 }
