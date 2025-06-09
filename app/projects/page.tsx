@@ -17,7 +17,6 @@ export default function Projects() {
           tags={['STM32', 'C++', 'Matlab', 'Simulink', 'WIP']}
           link="/projects/balstd"
           date="May 2025"
-          icon="/projects/balstd/balstd_icon.jpg"
         />
         <Card
           title="Conductor"
