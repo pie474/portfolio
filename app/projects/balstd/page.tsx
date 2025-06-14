@@ -20,7 +20,11 @@ export default function BalstdProjectPage() {
                 <section>
                     <h2 className="text-xl font-semibold mb-2">LQR Design</h2>
                     <p className="text-gray-400">
-                        The LQR assumes a simplified 2d model of the robot that includes a wheel, rigid leg, and single hip joint, with torques applicable at each joint.
+                        The LQR assumes a simplified 2d model of the robot that includes a wheel, rigid leg, and single hip joint, with torques applicable at each joint. Its state vector includes chassis pitch/velocity, wheel position/velocity, and pendulum angle/velocity. By driving this state to zero, it balances the robot.
+                    </p>
+                    <br />
+                    <p className="text-gray-400">
+                        The equations of motion were defined symbolically in a Matlab script, from which a symbolic solver was used to solve the nonlinear system model, linearize it into state space form, and finally solve the LQR problem to determine the K gain matrix.
                     </p>
                 </section>
 
@@ -62,9 +66,29 @@ export default function BalstdProjectPage() {
 
                 <section>
                     <h2 className="text-xl font-semibold mb-2">Deployment</h2>
+
                     <p className="text-gray-400">
-                        The controller was deployed to a STM32-based embedded platform. Motor encoders were used for proprioceptive feedback, and a 6-axis IMU on the chassis was used for world orientation. I'm currently in the process of solving the sim2real domain gap issue. Active progress is being made and I'll update this page accordingly, so check back if you're curious how I'm doing!
+                        The controller was deployed to a STM32-based embedded platform. Motor encoders were used for proprioceptive feedback, and a 6-axis IMU on the chassis was used for world orientation.
                     </p>
+
+                    <div className="flex justify-center mb-4 mt-4">
+                        <VideoPlayer
+                            src="/projects/balstd/moving_demo.MOV"
+                            caption="Demo of it balancing and driving around! (slowly because I was still scared of it)"
+                        />
+                    </div>
+
+                    <p className="text-gray-400">
+                        The chattering you can hear in the video is a combination of wheel motor backlash and minimal sensor filtering. Next steps I'm currently working on include more comprehensive remote control (I currently cannot control the leg length, tilt, nor turret), as well as a Kalman filter on the virtual model of the system.
+                    </p>
+
+                    <br />
+
+                    <p className="text-gray-400">
+                        Active progress is being made and I'll update this page accordingly, so check back if you're curious how I'm doing!
+                    </p>
+
+
                 </section>
 
             </div>
