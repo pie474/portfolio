@@ -34,11 +34,14 @@ export default function Card({ title, description, tags, link, date, icon }: Pro
                     <div className="flex justify-between items-start">
                         {link ? (
                             <Link
-                                href={link} className="text-xl font-bold text-white hover:underline inline-flex items-center gap-1 group"
+                                href={link}
+                                className="relative text-xl font-bold text-white inline-flex items-center gap-1 group transition-colors duration-150"
                                 {...(link.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                             >
-                                <span>{title}</span>
-                                <FaLink className="text-sm text-gray-400 group-hover:text-white transition" />
+                                <span className="relative after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-150 group-hover:after:w-full">
+                                    {title}
+                                </span>
+                                <FaLink className="text-sm text-gray-400 group-hover:text-white transition-colors duration-150" />
                             </Link>
                         ) : (
                             <h2 className="text-xl font-bold text-white">{title}</h2>
