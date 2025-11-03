@@ -15,8 +15,7 @@ export default function About() {
 
             <div className="mt-8">
                 <a
-                    href="/ChinmayMurthy_Resume.pdf"
-                    target="_blank"
+                    href="/api/download-resume"
                     rel="noopener noreferrer"
                     className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition"
                 >
