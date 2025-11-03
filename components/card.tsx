@@ -46,8 +46,6 @@ export default function Card({ title, description, tags, link, date, icon }: Pro
                         ) : (
                             <h2 className="text-xl font-bold text-white">{title}</h2>
                         )}
-                        {/* <h2 className="text-xl font-bold text-white">{title}</h2> */}
-
 
                         {date && (
                             <p className="text-xs text-gray-500">Last updated: {date}</p>
