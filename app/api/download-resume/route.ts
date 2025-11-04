@@ -1,7 +1,4 @@
-// app/api/download-resume/route.ts
-
 const RESUME_URL = 'https://pie474.github.io/resume/main.pdf';
-
 const DESIRED_FILENAME = 'Chinmay Murthy Resume.pdf';
 
 export async function GET() {
