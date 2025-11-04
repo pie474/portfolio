@@ -1,51 +1,56 @@
 import VideoPlayer from '@/components/video_player'
+import MdxLayout from '@/components/mdx_layout'
 
 # Two Wheel-Legged Balancing Robot
 
 This project explores the control of a two-wheeled robot equipped with active suspension legs using modern control techniques. Inspired by systems like Boston Dynamics' Handle and traditional inverted pendulums, the robot combines balance, leg articulation, and real-time control into one platform.
 
-<section>
-    ## Goal 
 
-    The robot is built on a custom two-wheeled drive base with 5-bar linkage suspension legs that can actively adjust for terrain or balance assistance. The control algorithm uses an LQR (Linear Quadratic Regulator) approach to maintain upright stability under disturbances.
-</section>
+## Goal 
 
-<section>
-    ## LQR Design
+The robot is built on a custom two-wheeled drive base with 5-bar linkage suspension legs that can actively adjust for terrain or balance assistance. The control algorithm uses an LQR (Linear Quadratic Regulator) approach to maintain upright stability under disturbances.
 
-    The LQR assumes a simplified 2d model of the robot that includes a wheel, rigid leg, and single hip joint, with torques applicable at each joint.
-</section>
 
-<section>
-    ## Simulation
+## LQR Design
 
-    Dynamic models of the robot were built in Simulink using Simscape Multibody to capture the true nonlinear dynamics of the leg and wheel mechanisms.
+The LQR assumes a simplified 2d model of the robot that includes a wheel, rigid leg, and single hip joint, with torques applicable at each joint.
 
-    <br />
 
-    An initial 2d model was first created to test as close to the LQR as possible. There was a lot of debugging that had to be done with sign conventions and such, which was much easier to do with this reduced dimensionality.
 
-    <div className="flex justify-center mb-4 mt-4">
-        <VideoPlayer
-            src="/projects/balstd/gated_ramp.mp4"
-            caption="Early 2D simulation on a flat surface, with the position setpoint being a saturating ramp function."
-        />
-    </div>
+## Simulation
 
-    Next was the full 3d simulation. With the 2d variant working, this was a simple matter of adding a second leg, and adding a couple more PID controllers to control  the newly introduced DOFs, like roll (side-side tilt), leg split (keep the legs at the same angle from the chassis), and yaw (overall heading).
+Dynamic models of the robot were built in Simulink using Simscape Multibody to capture the true nonlinear dynamics of the leg and wheel mechanisms.
 
-    <div className="flex justify-center mb-4 mt-4">
-        <VideoPlayer
-            src="/projects/balstd/sim_3d.mp4"
-            caption="3d version of the above simulation."
-        />
-    </div>
+<br />
 
-        This seemed pretty foolproof in simulation. It performed phenomenally against offset center-of-mass, incorrect torque scaling, and various starting states.
-</section>
+An initial 2d model was first created to test as close to the LQR as possible. There was a lot of debugging that had to be done with sign conventions and such, which was much easier to do with this reduced dimensionality.
 
-<section>
-    ## Deployment
+<div className="flex justify-center mb-4 mt-4">
+    <VideoPlayer
+        src="/projects/balstd/gated_ramp.mp4"
+        caption="Early 2D simulation on a flat surface, with the position setpoint being a saturating ramp function."
+    />
+</div>
 
-    The controller was deployed to a STM32-based embedded platform. Motor encoders were used for proprioceptive feedback, and a 6-axis IMU on the chassis was used for world orientation. I'm currently in the process of solving the sim2real domain gap issue. Active progress is being made and I'll update this page accordingly, so check back if you're curious how I'm doing!
-</section>
+Next was the full 3d simulation. With the 2d variant working, this was a simple matter of adding a second leg, and adding a couple more PID controllers to control  the newly introduced DOFs, like roll (side-side tilt), leg split (keep the legs at the same angle from the chassis), and yaw (overall heading).
+
+<div className="flex justify-center mb-4 mt-4">
+    <VideoPlayer
+        src="/projects/balstd/sim_3d.mp4"
+        caption="3d version of the above simulation."
+    />
+</div>
+
+    This seemed pretty foolproof in simulation. It performed phenomenally against offset center-of-mass, incorrect torque scaling, and various starting states.
+
+
+
+## Deployment
+
+The controller was deployed to a STM32-based embedded platform. Motor encoders were used for proprioceptive feedback, and a 6-axis IMU on the chassis was used for world orientation. I'm currently in the process of solving the sim2real domain gap issue. Active progress is being made and I'll update this page accordingly, so check back if you're curious how I'm doing!
+
+
+export default function MDXPage({ children }) {
+    return <MdxLayout>{children}</MdxLayout>
+
+}
