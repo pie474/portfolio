@@ -1,12 +1,13 @@
 type VideoPlayerProps = {
     src: string
     caption: string
+    preload?: string
 }
 
-export default function VideoPlayer({ src, caption }: VideoPlayerProps) {
+export default function VideoPlayer({ src, caption, preload = "none" }: VideoPlayerProps) {
     return (
         <div className="flex flex-col items-center w-full max-w-md mx-auto">
-            <video width="100%" controls preload="none" className="rounded-lg shadow-lg">
+            <video width="100%" controls preload={preload} className="rounded-lg shadow-lg">
                 <source src={src} type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
