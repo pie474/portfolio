@@ -66,11 +66,11 @@ Giving us
 
 ## The Lookahead Point
 
-This (<InlineMath math="L" />) is a point ahead of the robot along the path that the robot is attempting to move towards. Think of it as holding a carrot on a stick in front of a pig you're riding. It's calculated by adding a “lookahead distance” (<InlineMath math="D_L" />) to the robot's path parameter, and evaluating the path at that point
+This (<InlineMath math="L" />) is a point ahead of the robot along the path that the robot is attempting to move towards. Think of it as holding a carrot on a stick in front of a pig you're riding. It's calculated by adding a “lookahead distance” (<InlineMath math="D_L" />) to the robot's path parameter, and evaluating the path at that point.
 
 <BlockMath math="\vec{L}=\vec{P}(S(\vec{R})+D_L)" />
 
-The robot's physical trajectory will always be a smoother version of the input path, but by tuning the lookahead distance, this can be made negligible. Higher lookahead distances smooth the robot's trajectory by anticipating upcoming turns, while lower ones make the robot more responsive to positional error and attempt to follow the path more precisely. This value can even be calculated dynamically, perhaps as a function of the desired speed, but this hasn't been investigated practically yet
+The robot's physical trajectory will always be a smoother version of the input path, but by tuning the lookahead distance, this can be made negligible. Higher lookahead distances smooth the robot's trajectory by anticipating upcoming turns, while lower ones make the robot more responsive to positional error and attempt to follow the path more precisely. This value can even be calculated dynamically, perhaps as a function of the desired speed, but this hasn't been investigated practically yet.
 
 ## Movement Vector
 
