@@ -7,7 +7,7 @@ export default function MDXPage({ children }) {
 
 # Two Wheel-Legged Balancing Robot
 
-This project explores the control of a two-wheeled robot equipped with active suspension legs using modern control techniques. Inspired by systems like Boston Dynamics' Handle and traditional inverted pendulums, the robot combines balance, leg articulation, and real-time control into one platform.
+This project explores the control of a two-wheeled robot equipped with active suspension legs using optimal control techniques. Designed for the Robomaster/ARC robotics competitions, the goal is to keep the chassis as stable as possible while the robot navigates uneven terrain.
 
 
 ## Goal 
@@ -36,7 +36,7 @@ An initial 2d model was first created to test as close to the LQR as possible. T
 
 <br />
 
-Next was the full 3d simulation. With the 2d variant working, this was a simple matter of adding a second leg, and adding a couple more PID controllers to control  the newly introduced DOFs, like roll (side-side tilt), leg split (keep the legs at the same angle from the chassis), and yaw (overall heading).
+Next was the full 3d simulation. With the 2d variant working, this was a simple matter of adding a second leg, and adding a couple more PID controllers to control the newly introduced DOFs, like roll (side-side tilt), leg split (keep the legs at the same angle from the chassis), and yaw (overall heading).
 
 <br />
 <VideoPlayer
