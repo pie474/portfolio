@@ -1,0 +1,109 @@
+import { InlineMath, BlockMath } from 'react-katex'
+import MdxLayout from '@/components/mdx_layout'
+import Card from '@/components/card'
+
+export default function MDXPage({ children }) {
+    return <MdxLayout>{children}</MdxLayout>
+}
+
+
+# Robust Path Following Without Motion Profiling
+
+This is a simple algorithm I developed for my robotics team's fully autonomous ground robot. The task was to, given a list of path points generated via A\*, move the robot along the path while rejecting external disturbances and gracefully handling path recalculations. The algorithm assumes a fully holonomic chassis and only controls the translational component leaving heading/yaw free. A core reason this simple of an algorithm works is because of the lack of a timing requirement; The path could be followed at any reasonable rate.
+
+
+[Interactive Desmos simulation of some core features](https://www.desmos.com/calculator/meonslw9cx)
+
+
+## What is a Path
+
+Lets define a path as a 2d arc-length parameterized functions. This allows us to easily get the point on the path that is a certain distance along. This distance along the path is what i'll refer to as the path parameter (<InlineMath math="s" />).
+
+
+<BlockMath math="\vec{P}(s) = (x(s),y(s))" />
+
+
+We can then also define the tangent vector to a point on the path as
+
+
+<BlockMath math="\vec{P'}(s) = (x'(s),y'(s))" />
+
+Common paths include piecewise linear functions and splines/bezier curves if enforcing derivative continuity.
+
+## Calculating the Robot's Path Parameter
+
+The first step is figuring out where along the path we are. The simplest way of doing this is to find the point on the path that is closest to the robot's current position.
+
+If we define a function that maps the path parameter to the corresponding point's distance to the robot (<InlineMath math="R" />), 
+
+<BlockMath math="D(s) = dist(\vec{P}(s), \vec{R})" />
+
+what we're essentially doing is finding its global minimum.
+
+<BlockMath math="S(\vec{r}) = s_r : D(s_r) \lt D(s) \forall s" />
+
+### Handling Self-Intersecting Paths
+
+A limitation of this approach is that with paths that self-intersect or come close to doing so, it is possible for the robot's path parameter to jump to that of the other segment in the junction as a result of positional error, causing the robot to either repeat or skip a portion of the path. (The desmos graph above was created to demonstrate this specifically)
+
+To solve this, we can take into account the robot's last calculated path parameter <InlineMath math="s_{prev}" />. Instead of finding the *global* minimum of the distance function, we can find the *local* minimum with a parameter closest to <InlineMath math="s_{prev}" />.
+
+<BlockMath math="S(\vec{r}) = \underset{s_r \in \text{LocalMin}(D(s))}{\arg\min} \, |s_r - s_{\text{prev}}|" />
+
+*(I've used continuous function notation so far, but in the case of the line segment paths, this can be discretized by only considering the point on each segment closest to the robot)*
+
+The intuition behind this is that a local minimum indicates a section of the path that approaches then passes the robot. By finding the minimum closest to <InlineMath math="s_{prev}" />, we find the point on the path that isn't necessarily the absolute closest to the robot, but is also the most likely to be where the robot actually is.
+
+### Predicting Robot Motion
+
+As another extension to this, rather than using <InlineMath math="s_{prev}" /> directly, we can project it forward to where we expect the robot to be disregarding disturbances via a linear approximation of the robot's motion using the last known movement vector <InlineMath math="\vec{M}_{prev}" /> and elapsed time <InlineMath math="\Delta t" />.
+
+<BlockMath math="s_{pred}=(\vec{M}_{prev} \cdot \vec{P'}(s_{prev})) \Delta t" />
+
+Giving us
+
+<BlockMath math="S(\vec{r}) = \underset{s_r \in \text{LocalMin}(D(s))}{\arg\min} \, |s_r - s_{\text{pred}}|" />
+
+## The Lookahead Point
+
+This (<InlineMath math="L" />) is a point ahead of the robot along the path that the robot is attempting to move towards. Think of it as holding a carrot on a stick in front of a pig you're riding. It's calculated by adding a “lookahead distance” (<InlineMath math="D_L" />) to the robot's path parameter, and evaluating the path at that point.
+
+<BlockMath math="\vec{L}=\vec{P}(S(\vec{R})+D_L)" />
+
+The robot's physical trajectory will always be a smoother version of the input path, but by tuning the lookahead distance, this can be made negligible. Higher lookahead distances smooth the robot's trajectory by anticipating upcoming turns, while lower ones make the robot more responsive to positional error and attempt to follow the path more precisely. This value can even be calculated dynamically, perhaps as a function of the desired speed, but this hasn't been investigated practically yet.
+
+## Movement Vector
+
+This is the desired velocity in world frame that is ultimately fed to the chassis. At its core, it is the vector from the robot position to the lookahead point.
+
+<BlockMath math="\vec{M}=\vec{L}-\vec{R}" />
+
+An issue with this is that <InlineMath math="||\vec{M}||" /> varies with <InlineMath math="D_L" />. Imagine the robot is following a straight line path and is doing so with no positional error. In this scenario, <InlineMath math="||\vec{M}||=D_L" />. If we want <InlineMath math="||\vec{M}||" /> to stay constant with respect to <InlineMath math="D_L" />, the easy solution is to simply divide them. 
+
+(While this ultimately *is* an approximation since most real world scenarios won't have this simple a correlation, it works well enough for an application where precise speed control isn't important)
+
+<BlockMath math="\vec{M}=\frac{1}{D_L}(\vec{L}-\vec{R})" />
+
+Now, if we want to have control over the robot's rough movement speed (<InlineMath math="V_R" />) independent of the lookahead distance, we can just multiply them.
+
+<BlockMath math="\vec{M}=\frac{V_R}{D_L}(\vec{L}-\vec{R})" />
+
+## Wheel control
+
+Given this desired translational velocity vector, we can calculate the required angular velocities for each wheel on the chassis. PID controllers can then be used for each wheel to track their desired speeds.
+
+## And that's it!
+
+This is the core algorithm. It can handle most paths, and its precision and speed are tunable.
+
+## Other Features
+
+### Path Change Smoothing
+
+In the case of a significant change in the path received from the path planner, the look ahead point could jump suddenly, causing a jerk in the robot's motion.
+
+To avoid this, the system is informed when the path has changed significantly. In this case, it will have retained the last calculated lookahead point. It will also keep calculating the lookahead point along the new path, and for some time after the path change will progressively interpolate from the old to new lookahead point. This interpolated point is what the robot will move towards. 
+
+Interpolating via a quadratic bezier curve with the control point at the robot's location seems to work pretty well, encouraging the robot to slow down slightly and avoid overshooting too much on large direction changes.
+
+The result is some simulated notion of “inertia”, such that when the path changes, the robot will continue in its old direction for an instant before smoothly changing direction to follow the new path. This helps even out the overall motion.
