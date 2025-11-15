@@ -19,7 +19,19 @@ The robot is built on a custom two-wheeled drive base with 5-bar linkage suspens
 
 The LQR assumes a simplified 2d model of the robot that includes a wheel, rigid leg, and single hip joint, with torques applicable at each joint. Its state vector includes chassis pitch/velocity, wheel position/velocity, and pendulum angle/velocity. By driving this state to zero, it balances the robot.
 
-The equations of motion were defined symbolically in a Matlab script, from which a symbolic solver was used to solve the nonlinear system model, linearize it into state space form, and finally solve the LQR problem to determine the K gain matrix.
+The equations of motion were defined symbolically in a Matlab script, from which a symbolic solver was used to solve the nonlinear system model, linearize it into state space form, and finally solve the Discrete Algebraic Riccati Equation (DARE) to determine the LQR gain matrix.
+
+### Gain Scheduling
+
+This linearization is about a particular leg length. To avoid this restriction during operation, the gains were evaluated at a variety of plausible leg lengths and a 5th degree polynomial was fitted to each.
+
+<br />
+
+<img src="/projects/balstd/lqr_gain_scheduling.png" alt="icon" className="rounded-md" />
+
+<br />
+
+Ideally, the gain matrix would be solved symbolically in terms of the leg length allowing calculation of the exact values. However, this isn't easily accomplished in Matlab, so the polynomial approximation was settled for (after confirming the maximum error in the approximation had a negligable effect on performance). Now an appropriate gain set could be evaluated at the current leg length, ensuring good stabilization. 
 
 ## Simulation
 
@@ -48,7 +60,7 @@ Next was the full 3d simulation. With the 2d variant working, this was a simple 
 
 
 This seemed pretty foolproof in simulation. It performed phenomenally against offset center-of-mass, incorrect torque scaling, and various initial states.
-{/* However, it was still making other assumptions. Mainly, it was still a continuous-time controller (impossible with a microcontroller), and didn't model any sensor phase delays. */}
+Notably however, it was still making other assumptions. Mainly, it was still a continuous-time controller (impossible with a microcontroller), and didn't model any sensor/motor delays and motor dynamics (torque ripple, etc.). 
 
 
 ## Deployment
@@ -58,10 +70,20 @@ The controller was deployed to a STM32-based embedded platform. Motor encoders w
 <br />
 <VideoPlayer
     src="/projects/balstd/moving_demo.MOV"
-    caption="Demo of it balancing and driving around! (slowly because I was still scared of it)"
+    caption="First ever demo of it balancing and driving around! (slowly because I was still scared of it)"
     preload="auto"
 />
 
-The chattering you can hear in the video is a combination of wheel motor backlash and minimal sensor filtering. Next steps I'm currently working on include more comprehensive remote control (I currently cannot control the leg length, tilt, nor turret), as well as a Kalman filter on the virtual model of the system.
+(The chattering you can hear in the video believed to be a result of primarily wheel motor backlash.)
+
+### Safety
+
+Extreme caution was needed in early stages of testing, when the robot would likely freak out over small disturbances. To alleviate some of this responsibility, a "watchdog" system was implemented that would constantly monitor the robot state and trigger a "fall" mode (and an appropriate sound effect on the onboard buzzer) whenever anything looked amiss.
+
+## Next steps
+
+* Torque ripple compensation: From some tests I did, cogging torque seems to be making the commanded torque to the leg hip motors inaccurate. I'm working on compensating for this.
+* Wheel hub motors: New motors should remove backlash issues in the wheel and make their control a lot smoother.
+* Jumping: Ultimately I want this robot to be incredibly agile and take jumps/falls gracefully. The hip motors were spec'd to be more than powerful enough for this.
 
 Active progress is being made and I'll update this page accordingly, so check back if you're curious how I'm doing!

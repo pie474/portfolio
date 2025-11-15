@@ -9,7 +9,7 @@ export default function Projects() {
           description="Designed LQR based control algorithm to balance a two-wheel robot with 5-bar active suspension legs. Simulated then deployed to an STM32-based robot."
           tags={['STM32', 'C++', 'Matlab', 'Simulink', 'WIP']}
           link="/projects/balstd"
-          date="Jun 2025"
+          date="Nov 2025"
         />
         <Card
           title="Portfolio Website"

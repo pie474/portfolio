@@ -23,6 +23,19 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
                 {children}
             </a>
         ),
+        ul: ({ children }) => (
+            <ul className="list-disc list-inside space-y-1 ml-4 text-gray-300">
+                {children}
+            </ul>
+        ),
+        ol: ({ children }) => (
+            <ol className="list-decimal list-inside space-y-1 ml-4 text-gray-300">
+                {children}
+            </ol>
+        ),
+        li: ({ children }) => (
+            <li>{children}</li>
+        ),
         ...components,
     }
 }
