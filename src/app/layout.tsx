@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import "./globals.css";
+import './globals.css';
+import 'katex/dist/katex.min.css';
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 
