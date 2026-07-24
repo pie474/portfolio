@@ -66,7 +66,7 @@ export default function Music() {
                 />
                 <Card
                     title="IHNC (I Have No Clue)"
-                    description="Originally a piano sketch I make on my phone during a flight (that I had no clue how to name), this driving fusion piece blends a traditional symphonic sound with non-Western instruments, including hammered dulcimer, tabla, tanpura, shehnai, and panpipes."
+                    description="Originally a piano sketch I made on my phone during a flight (that I had no clue how to name), this driving fusion piece blends a traditional symphonic sound with non-Western instruments, including hammered dulcimer, tabla, tanpura, shehnai, and panpipes."
                     tags={['composition', 'orchestral', 'mockup', 'WIP']}
                     date="Mar 2023"
                     icon={<MiniAudioPlayer src="music/ihnc3_mastered.mp3" diameter={50} />}

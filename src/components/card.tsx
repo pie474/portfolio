@@ -20,7 +20,7 @@ export default function Card({ title, description, tags, link, date, icon }: Pro
             <div className="flex items-start gap-4">
                 {icon && (
                     <div
-                        className="flex-shrink-0 text-white"
+                        className="shrink-0 text-white"
                     >
                         {typeof icon === 'string' ? (
                             <img src={icon} alt="icon" className="w-8 h-8 object-contain rounded-xs" />
@@ -38,7 +38,7 @@ export default function Card({ title, description, tags, link, date, icon }: Pro
                                 className="relative text-xl font-bold text-white inline-flex items-center gap-1 group transition-colors duration-150"
                                 {...(link.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                             >
-                                <span className="relative after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-150 group-hover:after:w-full">
+                                <span className="relative after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:w-0 after:h-0.5 after:bg-white after:transition-all after:duration-150 group-hover:after:w-full">
                                     {title}
                                 </span>
                                 <FaLink className="text-sm text-gray-400 group-hover:text-white transition-colors duration-150" />
